@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -7,8 +8,10 @@ import HomeScreen from './src/screens/HomeScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import { UserProvider } from './src/context/UserContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const theme = {
 	...DefaultTheme,
@@ -16,6 +19,17 @@ const theme = {
 		...DefaultTheme.colors,
 		background: 'white',
 	},
+};
+
+const DrawerComponent = () => {
+	return (
+		<Drawer.Navigator
+			initialRouteName='Home'
+			screenOptions={{ headerShown: false }}
+		>
+			<Drawer.Screen name='Home' component={HomeScreen} />
+		</Drawer.Navigator>
+	);
 };
 
 export default function App() {
@@ -31,8 +45,8 @@ export default function App() {
 						/>
 						<Stack.Screen name='Login' component={LoginScreen} />
 						<Stack.Screen
-							name='Home'
-							component={HomeScreen}
+							name='HomeStack'
+							component={DrawerComponent}
 							options={{ headerShown: false }}
 						/>
 					</Stack.Navigator>

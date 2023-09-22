@@ -13,7 +13,7 @@ const SplashScreen = ({ navigation }) => {
 			const data = await loadData('userDetails');
 			if (data) {
 				setCurrentUser(data);
-				navigation.navigate('Home');
+				navigation.navigate('HomeStack');
 				return;
 			}
 			navigation.navigate('Login');

@@ -6,8 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ListItem, Header, Icon, Button } from '@rneui/themed';
 import { getCategorii } from '../api/ApiAxios';
 import FilterListItem from '../components/FilterListItem';
+import { DrawerActions } from '@react-navigation/native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [categorii, setCategorii] = useState([]);
 	const [categoriiBifate, setCategoriiBifate] = useState([]);
@@ -36,7 +37,14 @@ const HomeScreen = () => {
 				centerComponent={
 					<Text style={styles.headerTtitle}>Retea de restaurante</Text>
 				}
-				leftComponent={<Icon name='menu' size={30} color='#FFFF' />}
+				leftComponent={
+					<Icon
+						name='menu'
+						size={30}
+						color='#FFFF'
+						onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+					/>
+				}
 				rightComponent={<Icon name='shopping-cart' size={30} color='#FFFF' />}
 				backgroundColor='rgb(230,0,62)'
 				containerStyle={styles.header}
