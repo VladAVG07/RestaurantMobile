@@ -28,6 +28,7 @@ const DrawerComponent = () => {
 			screenOptions={{ headerShown: false }}
 		>
 			<Drawer.Screen name='Home' component={HomeScreen} />
+			{/* <Drawer.Screen name='Comenzile Mele' /> */}
 		</Drawer.Navigator>
 	);
 };

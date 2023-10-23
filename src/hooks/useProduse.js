@@ -18,7 +18,7 @@ function useProduse() {
 				for (const property in filters) {
 					const value = filters[property];
 					if (value) {
-						url += `&filter-property=${property}&filter-value=${value}`;
+						url += `&filter-properties[]=${property}&filter-values[]=${value}`;
 					}
 				}
 				console.log(url);

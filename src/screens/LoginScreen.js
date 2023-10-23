@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
 		} else {
 			storeData('userDetails', JSON.stringify(result));
 			setCurrentUser(result);
-			navigation.navigate('Home');
+			navigation.navigate('HomeStack');
 		}
 	};
 

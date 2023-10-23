@@ -1,35 +1,24 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Modal } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	FlatList,
+	Modal,
+	TouchableOpacity,
+} from 'react-native';
 import { UserContext } from '../context/UserContext';
 import useProduse from '../hooks/useProduse';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ListItem, Header, Icon, Button } from '@rneui/themed';
-import { getCategorii } from '../api/ApiAxios';
-import FilterListItem from '../components/FilterListItem';
+import { ListItem, Header, Icon, Button, Slider, Input } from '@rneui/themed';
+import FilterModal from '../components/FilterModal';
+
 import { DrawerActions } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
 	const [modalVisible, setModalVisible] = useState(false);
-	const [categorii, setCategorii] = useState([]);
-	const [categoriiBifate, setCategoriiBifate] = useState([]);
 
 	const { produse, totalPages, applyFilters } = useProduse();
-
-	const fetchCategorii = async () => {
-		const response = await getCategorii();
-		setCategorii(response.data.data);
-	};
-
-	const handleClick = (newCategorie, checked) => {
-		if (!checked) {
-			setCategoriiBifate([...categoriiBifate, newCategorie]);
-		} else {
-			const arr = categoriiBifate.filter(
-				(categorie) => categorie.id !== newCategorie.id
-			);
-			setCategoriiBifate(arr);
-		}
-	};
 
 	return (
 		<SafeAreaView>
@@ -50,44 +39,18 @@ const HomeScreen = ({ navigation }) => {
 				containerStyle={styles.header}
 			/>
 			<View style={styles.subheader}>
-				<Text style={{ flex: 1 }}>Total Pages {totalPages}</Text>
+				<Text style={{ flex: 1 }}>Total Pages</Text>
 				<Text style={{ fontWeight: 'bold', marginTop: 4, marginRight: 10 }}>
 					Filtreaza
 				</Text>
 				<Icon
 					name='sort'
 					onPress={() => {
-						fetchCategorii();
 						setModalVisible(!modalVisible);
 					}}
 					size={30}
 				/>
 			</View>
-			<Modal
-				animationType='fade'
-				visible={modalVisible}
-				onRequestClose={() => setModalVisible(!modalVisible)}
-			>
-				<View style={styles.filterContainer}>
-					<Text>Categorii:</Text>
-					<FlatList
-						data={categorii}
-						keyExtractor={(item) => item.id}
-						renderItem={({ item }) => {
-							return <FilterListItem item={item} handleClick={handleClick} />;
-						}}
-					/>
-
-					<Button
-						title='Filtreaza'
-						onPress={() => {
-							setModalVisible(!modalVisible);
-							console.log(categoriiBifate);
-							setCategoriiBifate([]);
-						}}
-					/>
-				</View>
-			</Modal>
 			<FlatList
 				data={produse}
 				renderItem={({ item }) => {
@@ -101,6 +64,11 @@ const HomeScreen = ({ navigation }) => {
 					);
 				}}
 				keyExtractor={(item) => item.id}
+			/>
+			<FilterModal
+				modalVisible={modalVisible}
+				setModalVisible={setModalVisible}
+				applyFilters={applyFilters}
 			/>
 		</SafeAreaView>
 	);

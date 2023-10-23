@@ -35,7 +35,11 @@ export const getProduse = async (url) => {
 };
 
 export const getCategorii = async () => {
-	return await instance.get('categorii');
+	return await instance.get('categorii/category-product-count');
+};
+
+export const getMinMaxPrices = async () => {
+	return await instance.get('categorii/min-max-prices');
 };
 
 // export const getConferences = async (
