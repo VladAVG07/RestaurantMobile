@@ -10,6 +10,7 @@ import {
 import { getCategorii, getMinMaxPrices } from '../api/ApiAxios';
 import { ListItem, Header, Icon, Button, Slider, Input } from '@rneui/themed';
 import FilterListItem from '../components/FilterListItem';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 	const [categorii, setCategorii] = useState([]);
@@ -42,7 +43,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 		};
 		fetchCategorii();
 		setMinMaxPrices();
-	}, []);
+	}, [modalVisible && true]);
 
 	const handleClick = (newCategorie, checked) => {
 		if (!checked) {
@@ -56,12 +57,12 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 	};
 
 	return (
-		<>
-			<Modal
-				animationType='fade'
-				visible={modalVisible}
-				onRequestClose={() => setModalVisible(!modalVisible)}
-			>
+		<Modal
+			animationType='fade'
+			visible={modalVisible}
+			onRequestClose={() => setModalVisible(!modalVisible)}
+		>
+			<SafeAreaView>
 				<View style={styles.filterContainer}>
 					<Header
 						backgroundColor='rgb(230,0,62)'
@@ -88,7 +89,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 								inputContainerStyle={{ borderBottomWidth: 0 }}
 								labelStyle={{ color: 'black' }}
 								value={pretMin}
-								// onChangeText={(text) => setPretMin(text)}
+								onChangeText={(text) => setPretMin(text)}
 							/>
 						</View>
 						<View style={styles.priceSelector}>
@@ -98,7 +99,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 								inputContainerStyle={{ borderBottomWidth: 0 }}
 								labelStyle={{ color: 'black' }}
 								value={pretMax}
-								// onChangeText={(text) => setPretMax(text)}
+								onChangeText={(text) => setPretMax(text)}
 							/>
 						</View>
 					</View>
@@ -117,12 +118,15 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 						buttonStyle={styles.filtreazaButton}
 					/>
 				</View>
-			</Modal>
-		</>
+			</SafeAreaView>
+		</Modal>
 	);
 };
 
 const styles = StyleSheet.create({
+	filterContainer: {
+		paddingTop: '9%',
+	},
 	modalAnuleaza: {
 		fontWeight: 'bold',
 		color: 'white',

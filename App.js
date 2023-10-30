@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SplashScreen from './src/screens/SplashScreen';
+import AdminScreen from './src/screens/AdminScreen';
 import { UserProvider } from './src/context/UserContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -28,7 +29,7 @@ const DrawerComponent = () => {
 			screenOptions={{ headerShown: false }}
 		>
 			<Drawer.Screen name='Home' component={HomeScreen} />
-			{/* <Drawer.Screen name='Comenzile Mele' /> */}
+			<Drawer.Screen name='Admin Panel' component={AdminScreen} />
 		</Drawer.Navigator>
 	);
 };
@@ -37,7 +38,10 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<UserProvider>
-				<NavigationContainer theme={theme}>
+				<NavigationContainer
+					theme={theme}
+					screenOptions={{ gesturesEnabled: false }}
+				>
 					<Stack.Navigator initialRouteName='Splash'>
 						<Stack.Screen
 							name='Splash'

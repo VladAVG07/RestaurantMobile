@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { loadData } from '../utils/AsyncStorageUtils';
 import queryString from 'query-string';
+import { loadData } from '../utils/AsyncStorageUtils';
 
 const instance = axios.create({
-	baseURL: 'http://10.0.2.2/VanzariRestaurante/api/web/v1/',
+	baseURL: 'http://192.168.1.131/VanzariRestaurante/api/web/v1/',
 	timeout: 10000,
 	timeoutErrorMessage: 'timeout',
 });
