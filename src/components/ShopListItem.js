@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from '@rneui/themed';
+import { ShoppingCartContext } from '../context/ShoppingCartContext';
 
 const ShopListItem = ({ item }) => {
+	const { shoppingCart, addToShoppingCart, shoppingCartCount } =
+		useContext(ShoppingCartContext);
+
 	return (
 		<View>
 			<ListItem bottomDivider>
@@ -13,7 +17,9 @@ const ShopListItem = ({ item }) => {
 					</View>
 					<TouchableOpacity
 						onPress={() => {
-							console.log(item);
+							addToShoppingCart(item);
+							// badgeCountHandler(shoppingCartCount);
+							// console.log(shoppingCartCount);
 						}}
 					>
 						<Icon name='add-shopping-cart' size={35} />

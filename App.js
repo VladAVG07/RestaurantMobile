@@ -7,9 +7,12 @@ import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import AdminScreen from './src/screens/AdminScreen';
+import ShoppingCartScreen from './src/screens/ShoppingCartScreen';
 import { UserProvider } from './src/context/UserContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { ShoppingCartProvider } from './src/context/ShoppingCartContext';
+import ComandaScreen from './src/screens/ComandaScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -38,24 +41,31 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<UserProvider>
-				<NavigationContainer
-					theme={theme}
-					screenOptions={{ gesturesEnabled: false }}
-				>
-					<Stack.Navigator initialRouteName='Splash'>
-						<Stack.Screen
-							name='Splash'
-							component={SplashScreen}
-							options={{ headerShown: false }}
-						/>
-						<Stack.Screen name='Login' component={LoginScreen} />
-						<Stack.Screen
-							name='HomeStack'
-							component={DrawerComponent}
-							options={{ headerShown: false }}
-						/>
-					</Stack.Navigator>
-				</NavigationContainer>
+				<ShoppingCartProvider>
+					<NavigationContainer
+						theme={theme}
+						screenOptions={{ gesturesEnabled: false }}
+					>
+						<Stack.Navigator initialRouteName='Splash'>
+							<Stack.Screen
+								name='Splash'
+								component={SplashScreen}
+								options={{ headerShown: false }}
+							/>
+							<Stack.Screen name='Login' component={LoginScreen} />
+							<Stack.Screen
+								name='HomeStack'
+								component={DrawerComponent}
+								options={{ headerShown: false, gestureEnabled: false }}
+							/>
+							<Stack.Screen
+								name='ShoppingCart'
+								component={ShoppingCartScreen}
+							/>
+							<Stack.Screen name='Comanda' component={ComandaScreen} />
+						</Stack.Navigator>
+					</NavigationContainer>
+				</ShoppingCartProvider>
 			</UserProvider>
 		</SafeAreaProvider>
 	);
