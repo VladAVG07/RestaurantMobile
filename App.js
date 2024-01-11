@@ -44,9 +44,12 @@ export default function App() {
 				<ShoppingCartProvider>
 					<NavigationContainer
 						theme={theme}
-						screenOptions={{ gesturesEnabled: false }}
+						screenOptions={{ gesturesEnabled: false, headerShown: false }}
 					>
-						<Stack.Navigator initialRouteName='Splash'>
+						<Stack.Navigator
+							initialRouteName='Splash'
+							screenOptions={{ headerShown: false }}
+						>
 							<Stack.Screen
 								name='Splash'
 								component={SplashScreen}

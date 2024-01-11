@@ -25,7 +25,9 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 		});
 		filters.pret_curent = `${pretMin}-${pretMax}`;
 		console.log(filters);
-		applyFilters(filters);
+		if (applyFilters) {
+			applyFilters(filters);
+		}
 	};
 
 	useEffect(() => {
@@ -42,7 +44,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 			setCategorii(response.data.data);
 		};
 		fetchCategorii();
-		setMinMaxPrices();
+		//setMinMaxPrices();
 	}, [modalVisible && true]);
 
 	const handleClick = (newCategorie, checked) => {
@@ -63,6 +65,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 			onRequestClose={() => setModalVisible(!modalVisible)}
 		>
 			<SafeAreaView>
+				<Text style={{ fontWeight: 'bold' }}>Filtreaza</Text>
 				<View style={styles.filterContainer}>
 					<Header
 						backgroundColor='rgb(230,0,62)'

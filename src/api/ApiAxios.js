@@ -4,7 +4,7 @@ import { loadData } from '../utils/AsyncStorageUtils';
 
 //TODO pune pe server toate APIURILE
 const instance = axios.create({
-	baseURL: 'http://192.168.1.131/VanzariRestaurante/api/web/v1/',
+	baseURL: 'http://51.20.48.224/VanzariRestaurante/api/web/index.php?r=v1/',
 	timeout: 10000,
 	timeoutErrorMessage: 'timeout',
 });
@@ -43,6 +43,9 @@ export const getMinMaxPrices = async () => {
 	return await instance.get('categorii/min-max-prices');
 };
 
+export const sendComanda = async (comanda) => {
+	return await instance.post('comenzi', comanda);
+};
 // export const getConferences = async (
 //   // page = 0,
 //   // search,

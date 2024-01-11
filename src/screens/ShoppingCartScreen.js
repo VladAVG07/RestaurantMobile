@@ -3,19 +3,24 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import ShoppingCartItem from '../components/ShoppingCartItem';
 import { ShoppingCartContext } from '../context/ShoppingCartContext';
 import { Button } from '@rneui/themed';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ShoppingCartScreen = ({ navigation }) => {
 	const { shoppingCart } = useContext(ShoppingCartContext);
 
 	return (
-		<View style={{ padding: 10 }}>
-			<FlatList
-				data={shoppingCart}
-				key={(item) => item.id}
-				renderItem={({ item }) => {
-					return <ShoppingCartItem produs={item} />;
-				}}
-			/>
+		<SafeAreaView style={{ padding: 10 }}>
+			{shoppingCart.length == 0 ? (
+				<Text>Cosul dumneavoastra este gol</Text>
+			) : (
+				<FlatList
+					data={shoppingCart}
+					key={(item) => item.id}
+					renderItem={({ item }) => {
+						return <ShoppingCartItem produs={item} />;
+					}}
+				/>
+			)}
 			{/* <Text>Total: </Text> */}
 			<Button
 				title='Finalizare Comanda'
@@ -25,7 +30,7 @@ const ShoppingCartScreen = ({ navigation }) => {
 					navigation.navigate('Comanda');
 				}}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 };
 

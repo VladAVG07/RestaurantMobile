@@ -72,7 +72,7 @@ const HomeScreen = ({ navigation }) => {
 			<FilterModal
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
-				applyFilters={applyFilters}
+				//applyFilters={applyFilters}
 			/>
 		</>
 	);

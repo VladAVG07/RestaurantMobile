@@ -3,8 +3,8 @@ import { getProduse } from '../api/ApiAxios';
 
 function useProduse() {
 	const [produse, setProduse] = useState([]);
-	const [totalPages, setTotalPages] = useState(1);
-	const [currentPage, setCurrentPage] = useState(0);
+	const [totalPages, setTotalPages] = useState(2);
+	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({}); // Filter object
 
@@ -12,7 +12,7 @@ function useProduse() {
 		const fetchProduse = async () => {
 			setLoading(true);
 			try {
-				let url = `produse?page=${currentPage}`;
+				let url = `produse&page=${currentPage}`;
 
 				// Add filter properties and values to the URL
 				for (const property in filters) {
@@ -27,7 +27,7 @@ function useProduse() {
 				setProduse((prevProduse) => [...prevProduse, ...items]);
 				setTotalPages(totalPages);
 
-				if (currentPage < totalPages) {
+				if (currentPage <= totalPages) {
 					setCurrentPage(currentPage + 1);
 				}
 			} catch (error) {
@@ -37,20 +37,20 @@ function useProduse() {
 			setLoading(false);
 		};
 
-		if (currentPage < totalPages && !loading) {
+		if (currentPage <= totalPages && !loading) {
 			fetchProduse();
 		}
 	}, [currentPage, totalPages, loading, filters]);
 
 	const loadMore = () => {
-		if (currentPage < totalPages && !loading) {
+		if (currentPage <= totalPages && !loading) {
 			setCurrentPage(currentPage + 1);
 		}
 	};
 
 	const applyFilters = (newFilters) => {
 		setFilters(newFilters);
-		setCurrentPage(0); // Reset to the first page when applying filters
+		setCurrentPage(1); // Reset to the first page when applying filters
 		setProduse([]); // Clear the previous products when filters change
 	};
 
