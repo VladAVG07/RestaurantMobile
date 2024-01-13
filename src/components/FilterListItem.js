@@ -23,9 +23,11 @@ const FilterListItem = ({ item, handleClick }) => {
 								handleClick(item, checked);
 							}}
 						/>
-						<ListItem.Title style={styles.title}>{item.nume}</ListItem.Title>
+						<ListItem.Title style={styles.title}>
+							{item.categorie}
+						</ListItem.Title>
 					</View>
-					{/* <ListItem.Title
+					<ListItem.Title
 						style={{
 							backgroundColor: '#cecece',
 							padding: 2,
@@ -36,7 +38,7 @@ const FilterListItem = ({ item, handleClick }) => {
 						}}
 					>
 						{item.numar_produse}
-					</ListItem.Title> */}
+					</ListItem.Title>
 				</ListItem.Content>
 			</ListItem>
 		</>

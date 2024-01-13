@@ -12,7 +12,7 @@ function useProduse() {
 		const fetchProduse = async () => {
 			setLoading(true);
 			try {
-				let url = `produse&page=${currentPage}`;
+				let url = `produse?page=${currentPage}`;
 
 				// Add filter properties and values to the URL
 				for (const property in filters) {
@@ -27,7 +27,7 @@ function useProduse() {
 				setProduse((prevProduse) => [...prevProduse, ...items]);
 				setTotalPages(totalPages);
 
-				if (currentPage <= totalPages) {
+				if (currentPage < totalPages) {
 					setCurrentPage(currentPage + 1);
 				}
 			} catch (error) {
@@ -37,13 +37,13 @@ function useProduse() {
 			setLoading(false);
 		};
 
-		if (currentPage <= totalPages && !loading) {
+		if (currentPage < totalPages && !loading) {
 			fetchProduse();
 		}
 	}, [currentPage, totalPages, loading, filters]);
 
 	const loadMore = () => {
-		if (currentPage <= totalPages && !loading) {
+		if (currentPage < totalPages && !loading) {
 			setCurrentPage(currentPage + 1);
 		}
 	};

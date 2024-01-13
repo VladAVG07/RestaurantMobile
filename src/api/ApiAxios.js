@@ -4,7 +4,7 @@ import { loadData } from '../utils/AsyncStorageUtils';
 
 //TODO pune pe server toate APIURILE
 const instance = axios.create({
-	baseURL: 'http://51.20.48.224/VanzariRestaurante/api/web/index.php?r=v1/',
+	baseURL: 'http://16.171.228.106/api/v1/',
 	timeout: 10000,
 	timeoutErrorMessage: 'timeout',
 });

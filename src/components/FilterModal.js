@@ -11,6 +11,7 @@ import { getCategorii, getMinMaxPrices } from '../api/ApiAxios';
 import { ListItem, Header, Icon, Button, Slider, Input } from '@rneui/themed';
 import FilterListItem from '../components/FilterListItem';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 	const [categorii, setCategorii] = useState([]);
@@ -44,7 +45,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 			setCategorii(response.data.data);
 		};
 		fetchCategorii();
-		//setMinMaxPrices();
+		setMinMaxPrices();
 	}, [modalVisible && true]);
 
 	const handleClick = (newCategorie, checked) => {
@@ -64,7 +65,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 			visible={modalVisible}
 			onRequestClose={() => setModalVisible(!modalVisible)}
 		>
-			<SafeAreaView>
+			<ScrollView>
 				<Text style={{ fontWeight: 'bold' }}>Filtreaza</Text>
 				<View style={styles.filterContainer}>
 					<Header
@@ -76,13 +77,13 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 						}
 					/>
 					<Text style={styles.filterSubHeader}>Categorii:</Text>
-					<FlatList
-						data={categorii}
-						keyExtractor={(item) => item.id}
-						renderItem={({ item }) => {
-							return <FilterListItem item={item} handleClick={handleClick} />;
-						}}
-					/>
+					{categorii.map((categorie) => (
+						<FilterListItem
+							item={categorie}
+							handleClick={handleClick}
+							key={categorie.id}
+						/>
+					))}
 					<Text style={styles.filterSubHeader}>Pret:</Text>
 					<View style={styles.pretContainer}>
 						<View style={styles.priceSelector}>
@@ -121,7 +122,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 						buttonStyle={styles.filtreazaButton}
 					/>
 				</View>
-			</SafeAreaView>
+			</ScrollView>
 		</Modal>
 	);
 };
