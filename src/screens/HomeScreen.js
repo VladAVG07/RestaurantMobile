@@ -33,6 +33,10 @@ const HomeScreen = ({ navigation }) => {
 
 	const { produse, totalPages, applyFilters } = useProduse();
 
+	// useEffect(() => {
+		
+	// } , [shoppingCartCount])
+
 	return (
 		<>
 			<MainHeader />

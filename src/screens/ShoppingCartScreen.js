@@ -4,33 +4,46 @@ import ShoppingCartItem from '../components/ShoppingCartItem';
 import { ShoppingCartContext } from '../context/ShoppingCartContext';
 import { Button } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import MainHeader from '../components/MainHeader';
 
 const ShoppingCartScreen = ({ navigation }) => {
-	const { shoppingCart } = useContext(ShoppingCartContext);
+	const { shoppingCart, shoppingCartCount } = useContext(ShoppingCartContext);
 
 	return (
-		<SafeAreaView style={{ padding: 10 }}>
-			{shoppingCart.length == 0 ? (
-				<Text>Cosul dumneavoastra este gol</Text>
-			) : (
-				<FlatList
-					data={shoppingCart}
-					key={(item) => item.id}
-					renderItem={({ item }) => {
-						return <ShoppingCartItem produs={item} />;
-					}}
-				/>
-			)}
-			{/* <Text>Total: </Text> */}
-			<Button
-				title='Finalizare Comanda'
-				buttonStyle={styles.butonComanda}
-				color='rgb(230,0,62)'
-				onPress={() => {
-					navigation.navigate('Comanda');
-				}}
-			/>
-		</SafeAreaView>
+		<View>
+			<MainHeader />
+			<SafeAreaView style={{ padding: 10 }}>
+				{shoppingCart.length == 0 ? (
+					<Text style={{ fontWeight: 'bold' }}>0 produse</Text>
+				) : (
+					<FlatList
+						data={shoppingCart}
+						key={(item) => item.id}
+						renderItem={({ item }) => {
+							return <ShoppingCartItem produs={item} />;
+						}}
+					/>
+				)}
+				{/* <Text>Total: </Text> */}
+
+				{shoppingCartCount === 0 ? (
+					<Text style={{ fontWeight: 'bold' }}>
+						Nu puteti plasa comanda. Cosul dumneavoastra este gol
+					</Text>
+				) : (
+					<Button
+						title='Finalizare Comanda'
+						buttonStyle={styles.butonComanda}
+						color='rgb(230,0,62)'
+						onPress={() => {
+							if (shoppingCartCount == 0) {
+							}
+							navigation.navigate('Comanda');
+						}}
+					/>
+				)}
+			</SafeAreaView>
+		</View>
 	);
 };
 

@@ -10,7 +10,11 @@ import {
 import { getCategorii, getMinMaxPrices } from '../api/ApiAxios';
 import { ListItem, Header, Icon, Button, Slider, Input } from '@rneui/themed';
 import FilterListItem from '../components/FilterListItem';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+	SafeAreaView,
+	SafeAreaProvider,
+	useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
@@ -18,6 +22,8 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 	const [categoriiBifate, setCategoriiBifate] = useState([]);
 	const [pretMin, setPretMin] = useState('');
 	const [pretMax, setPretMax] = useState('');
+
+	const insets = useSafeAreaInsets();
 
 	const handleFilters = () => {
 		const filters = {};
@@ -65,7 +71,17 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 			visible={modalVisible}
 			onRequestClose={() => setModalVisible(!modalVisible)}
 		>
-			<ScrollView>
+			<View
+				style={{
+					flex: 1,
+					paddingTop: insets.top,
+					paddingBottom: insets.bottom,
+					paddingLeft: insets.left,
+					paddingRight: insets.right,
+					backgroundColor: 'red',
+				}}
+			></View>
+			{/* <ScrollView>
 				<Text style={{ fontWeight: 'bold' }}>Filtreaza</Text>
 				<View style={styles.filterContainer}>
 					<Header
@@ -122,7 +138,7 @@ const FilterModal = ({ modalVisible, setModalVisible, applyFilters }) => {
 						buttonStyle={styles.filtreazaButton}
 					/>
 				</View>
-			</ScrollView>
+			</ScrollView> */}
 		</Modal>
 	);
 };

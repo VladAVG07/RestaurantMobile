@@ -4,7 +4,7 @@ const ShoppingCartContext = React.createContext({});
 
 const ShoppingCartProvider = ({ children }) => {
 	const [shoppingCart, setShoppingCart] = useState([]);
-	const [shoppingCartCount, setShoppingCartCount] = useState(0);
+	//const [shoppingCartCount, setShoppingCartCount] = useState(0);
 
 	const addToShoppingCart = (product) => {
 		const existaProdus = shoppingCart.find((e) => e.id == product.id);
@@ -58,7 +58,7 @@ const ShoppingCartProvider = ({ children }) => {
 				addToShoppingCart,
 				removeFromShoppingCart,
 				editShoppingCart,
-				shoppingCartCount,
+				shoppingCartCount: shoppingCart.length,
 			}}
 		>
 			{children}
