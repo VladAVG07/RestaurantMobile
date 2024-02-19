@@ -14,10 +14,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { ShoppingCartProvider } from './src/context/ShoppingCartContext';
 import ComandaScreen from './src/screens/ComandaScreen';
+import RootNavigator from './src/navigation/RootNavigator';
 
-const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-const Tab = createMaterialBottomTabNavigator();
+// const Stack = createNativeStackNavigator();
+// const Drawer = createDrawerNavigator();
+// const Tab = createMaterialBottomTabNavigator();
 
 const theme = {
 	...DefaultTheme,
@@ -27,34 +28,34 @@ const theme = {
 	},
 };
 
-const DrawerComponent = () => {
-	return (
-		<Drawer.Navigator
-			initialRouteName='Home'
-			screenOptions={{ headerShown: false }}
-		>
-			<Drawer.Screen name='Home' component={HomeScreen} />
-			<Drawer.Screen name='Admin Panel' component={AdminScreen} />
-		</Drawer.Navigator>
-	);
-};
+// const DrawerComponent = () => {
+// 	return (
+// 		<Drawer.Navigator
+// 			initialRouteName='Home'
+// 			screenOptions={{ headerShown: false }}
+// 		>
+// 			<Drawer.Screen name='Home' component={HomeScreen} />
+// 			<Drawer.Screen name='Admin Panel' component={AdminScreen} />
+// 		</Drawer.Navigator>
+// 	);
+// };
 
-const BottomNavigatorTabComponent = () => {
-	return (
-		<Tab.Navigator barStyle={styles.bottomBar} initialRouteName='Home'>
-			<Tab.Screen name='Home' component={HomeScreen} />
-			<Tab.Screen name='ShoppingCart' component={ShoppingCartScreen} />
-			<Tab.Screen name='Admin Panel' component={AdminScreen} />
-		</Tab.Navigator>
-	);
-};
+// const BottomNavigatorTabComponent = () => {
+// 	return (
+// 		<Tab.Navigator barStyle={styles.bottomBar} initialRouteName='Home'>
+// 			<Tab.Screen name='Home' component={HomeScreen} />
+// 			<Tab.Screen name='ShoppingCart' component={ShoppingCartScreen} />
+// 			<Tab.Screen name='Admin Panel' component={AdminScreen} />
+// 		</Tab.Navigator>
+// 	);
+// };
 
-const ShoppingCartStack = () => {
-	<Stack.Navigator initialRouteName='ShoppingCart'>
-		<Stack.Screen name='ShoppingCart' component={ShoppingCartScreen} />
-		<Stack.Screen name='ComandaScreen' component={ComandaScreen} />
-	</Stack.Navigator>;
-};
+// const ShoppingCartStack = () => {
+// 	<Stack.Navigator initialRouteName='ShoppingCart'>
+// 		<Stack.Screen name='ShoppingCart' component={ShoppingCartScreen} />
+// 		<Stack.Screen name='ComandaScreen' component={ComandaScreen} />
+// 	</Stack.Navigator>;
+// };
 
 export default function App() {
 	return (
@@ -65,7 +66,7 @@ export default function App() {
 						theme={theme}
 						screenOptions={{ gesturesEnabled: false, headerShown: false }}
 					>
-						<Stack.Navigator
+						{/* <Stack.Navigator
 							initialRouteName='Splash'
 							screenOptions={{ headerShown: false }}
 						>
@@ -75,7 +76,7 @@ export default function App() {
 								options={{ headerShown: false }}
 							/>
 							<Stack.Screen name='Login' component={LoginScreen} />
-							{/* <Stack.Screen name='HomeStack' component={DrawerComponent} /> */}
+							<Stack.Screen name='HomeStack' component={DrawerComponent} />
 							<Stack.Screen
 								name='HomeStack'
 								component={BottomNavigatorTabComponent}
@@ -85,7 +86,8 @@ export default function App() {
 								name='ShoppingCart'
 								component={ShoppingCartScreen}
 							/>
-						</Stack.Navigator>
+						</Stack.Navigator> */}
+						<RootNavigator />
 					</NavigationContainer>
 				</ShoppingCartProvider>
 			</UserProvider>

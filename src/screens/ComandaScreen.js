@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ShoppingCartItem from '../components/ShoppingCartItem';
 import { Input, Icon, Button } from '@rneui/themed';
 import { sendComanda } from '../api/ApiAxios';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const sendComanda1 = async (comanda) => {
 	const r = await sendComanda(comanda);
@@ -24,6 +25,12 @@ const ComandaScreen = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [adresa, setAdresa] = useState('');
 	const [mentiuni, setMentiuni] = useState('');
+	const [open, setOpen] = useState(false);
+	const [value, setValue] = useState(null);
+	const [items, setItems] = useState([
+		{ label: 'Cash', value: 0 },
+		{ label: 'Card', value: 1 },
+	]);
 
 	return (
 		<ScrollView>
@@ -108,10 +115,14 @@ const ComandaScreen = () => {
 					<Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 6 }}>
 						Mod plata:
 					</Text>
-					{
-						//TODO api mod plata
-					}
-					<Modal visible={modalVisible}></Modal>
+					<DropDownPicker
+						open={open}
+						value={value}
+						items={items}
+						setOpen={setOpen}
+						setValue={setValue}
+						setItems={setItems}
+					/>
 				</View>
 
 				<Button
@@ -123,6 +134,7 @@ const ComandaScreen = () => {
 							return { id: produs.id, cantitate: produs.cantitate };
 						});
 						const comanda = { mentiuni, produse, mod_plata: 1 };
+						console.log(comanda);
 						sendComanda1(comanda);
 					}}
 				/>

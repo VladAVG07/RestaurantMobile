@@ -9,10 +9,7 @@ import {
 } from 'react-native';
 import { UserContext } from '../context/UserContext';
 import useProduse from '../hooks/useProduse';
-import {
-	SafeAreaView,
-	useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
 	ListItem,
 	Header,
@@ -25,7 +22,6 @@ import {
 import FilterModal from '../components/FilterModal';
 import MainHeader from '../components/MainHeader';
 import ShopListItem from '../components/ShopListItem';
-import RestaurantCard from '../components/RestaurantCard';
 
 import { DrawerActions } from '@react-navigation/native';
 import { ShoppingCartContext } from '../context/ShoppingCartContext';
@@ -36,21 +32,13 @@ const HomeScreen = ({ navigation }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const { produse, totalPages, applyFilters } = useProduse();
-	const insets = useSafeAreaInsets();
 
 	// useEffect(() => {
 
 	// } , [shoppingCartCount])
 
 	return (
-		<View
-			style={{
-				flex: 1,
-				paddingLeft: insets.left,
-				paddingRight: insets.right,
-				paddingBottom: insets.bottom,
-			}}
-		>
+		<>
 			<MainHeader />
 			{/* <View style={styles.subheader}>
 				<View style={{ flexDirection: 'row' }}>
@@ -78,7 +66,7 @@ const HomeScreen = ({ navigation }) => {
 					</View>
 				</TouchableOpacity>
 						</View> */}
-			{/* <FlatList
+			<FlatList
 				data={produse}
 				renderItem={({ item }) => {
 					return <ShopListItem item={item} />;
@@ -89,9 +77,8 @@ const HomeScreen = ({ navigation }) => {
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 				applyFilters={applyFilters}
-			/> */}
-			<RestaurantCard />
-		</View>
+			/>
+		</>
 	);
 };
 

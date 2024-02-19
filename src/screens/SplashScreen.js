@@ -9,6 +9,7 @@ const SplashScreen = ({ navigation }) => {
 	const { setCurrentUser } = useContext(UserContext);
 
 	useEffect(() => {
+		AsyncStorage.clear();
 		const userData = async () => {
 			const data = await loadData('userDetails');
 			if (data) {
