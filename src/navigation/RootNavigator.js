@@ -14,7 +14,7 @@ const RootNavigator = () => {
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen name='Splash' component={SplashScreen} />
-			<Stack.Screen name='Login' component={LoginNavigator} />
+			<Stack.Screen name='LoginNav' component={LoginNavigator} />
 			<Stack.Screen name='HomeStack' component={HomeTabNavigator} />
 		</Stack.Navigator>
 	);

@@ -6,6 +6,7 @@ import MyAccountScreen from '../screens/AdminScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import PromotiiScreen from '../screens/PromotiiScreen';
 import { Icon } from '@rneui/themed';
+import OrderNavigator from './OrderNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ const HomeTabNavigator = () => {
 						/>
 					),
 				}}
-				component={HomeScreen}
+				component={OrderNavigator}
 			/>
 			<Tab.Screen
 				name='Oferte'

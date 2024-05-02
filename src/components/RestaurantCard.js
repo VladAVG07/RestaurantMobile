@@ -1,36 +1,60 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { Card, Image } from '@rneui/themed';
-import { FlipInEasyX } from 'react-native-reanimated';
+import {
+	View,
+	Text,
+	StyleSheet,
+	ActivityIndicator,
+	TouchableOpacity,
+} from 'react-native';
+import { Card, Image, Icon } from '@rneui/themed';
 
-const RestaurantCard = () => {
+const RestaurantCard = ({ navigation }) => {
 	return (
-		<Card containerStyle={styles.cardContainer} wrapperStyle={styles.wrapper}>
-			<View style={styles.pozaView}>
-				<Image
-					style={styles.item}
-					source={{
-						uri: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Pizza-3007395.jpg',
+		<TouchableOpacity
+			onPress={() => {
+				navigation.navigate('Restaurant');
+			}}
+		>
+			<Card containerStyle={styles.cardContainer} wrapperStyle={styles.wrapper}>
+				<View style={styles.pozaView}>
+					<Image
+						style={styles.item}
+						source={{
+							uri: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Pizza-3007395.jpg',
+						}}
+					/>
+
+					<View style={styles.raiting}>
+						<Icon type='material' name='thumb-up' color={'white'} />
+						<Text style={{ color: 'white', marginLeft: 4, marginTop: 4 }}>
+							Raiting
+						</Text>
+					</View>
+				</View>
+				<View
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
 					}}
-				/>
-			</View>
-			<View
-				style={{
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-				}}
-			>
-				<Text style={{ fontWeight: 'bold', fontSize: 20 }}>
-					Nume restaurant
-				</Text>
-				<Text style={{ fontWeight: 'bold', fontSize: 20 }}>Categorie</Text>
-			</View>
-			<View></View>
-			<Text>Cost livrare</Text>
-			<Text>Raiting</Text>
-			<Text>Timp livrare</Text>
-		</Card>
+				>
+					<Text style={{ fontWeight: 'bold', fontSize: 20 }}>
+						Nume restaurant
+					</Text>
+					<Text style={{ fontWeight: 'bold', fontSize: 20 }}>Categorie</Text>
+				</View>
+				<View
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+					}}
+				>
+					<Icon type='font-awesome' name='truck' />
+					<Text style={{ marginHorizontal: 6 }}>5.99 RON</Text>
+					<Text>25-35 min</Text>
+				</View>
+			</Card>
+		</TouchableOpacity>
 	);
 };
 
@@ -61,6 +85,14 @@ const styles = StyleSheet.create({
 		borderWidth: 0,
 		display: 'flex',
 		flexDirection: 'column',
+	},
+	raiting: {
+		display: 'flex',
+		flexDirection: 'row',
+		zIndex: 1,
+		position: 'absolute',
+		right: 11,
+		bottom: 10,
 	},
 });
 

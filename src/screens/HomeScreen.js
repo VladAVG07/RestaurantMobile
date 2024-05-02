@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
 
 	const [modalVisible, setModalVisible] = useState(false);
 
-	const { produse, totalPages, applyFilters } = useProduse();
+	//const { produse, totalPages, applyFilters } = useProduse();
 	const insets = useSafeAreaInsets();
 
 	// useEffect(() => {
@@ -90,7 +90,7 @@ const HomeScreen = ({ navigation }) => {
 				setModalVisible={setModalVisible}
 				applyFilters={applyFilters}
 			/> */}
-			<RestaurantCard />
+			<RestaurantCard navigation={navigation} />
 		</View>
 	);
 };

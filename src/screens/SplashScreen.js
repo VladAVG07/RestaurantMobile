@@ -9,7 +9,6 @@ const SplashScreen = ({ navigation }) => {
 	const { setCurrentUser } = useContext(UserContext);
 
 	useEffect(() => {
-		AsyncStorage.clear();
 		const userData = async () => {
 			const data = await loadData('userDetails');
 			if (data) {
@@ -17,7 +16,7 @@ const SplashScreen = ({ navigation }) => {
 				navigation.navigate('HomeStack');
 				return;
 			}
-			navigation.navigate('Login');
+			navigation.navigate('LoginNav');
 		};
 		setTimeout(userData, 3000);
 	}, []);
