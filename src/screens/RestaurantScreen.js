@@ -25,7 +25,10 @@ const RestaurantScreen = ({ route, navigation }) => {
                 paddingBottom: insets.bottom,
             }}
         >
-            <MainHeader />
+            <MainHeader
+                leftIconName={'arrow-back'}
+                onIconPress={navigation.pop}
+            />
             <SectionList
                 sections={data}
                 keyExtractor={(item, index) => item + index}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     View,
     Text,
@@ -13,16 +13,19 @@ import {
 } from 'react-native-safe-area-context';
 import { Button, Icon } from '@rneui/themed';
 import SettingCard from '../components/SettingCard';
+import { removeData } from '../utils/AsyncStorageUtils';
+import { UserContext } from '../context/UserContext';
 
-const AdminScreen = () => {
+const AdminScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
+    const { logOutUser } = useContext(UserContext);
     const menuItems = [
         {
             key: '1',
             icon: 'shopping-bag',
             title: 'Comenzi',
             action: () => {
-                console.log('Lista comenzi');
+                navigation.navigate('ComenzileMele');
             },
         },
         {
@@ -46,7 +49,19 @@ const AdminScreen = () => {
             icon: 'logout',
             title: 'Deconectare',
             action: () => {
-                console.log('Deconectare');
+                try {
+                    console.log('before remove');
+                    const response = removeData('userDetails');
+                    console.log(response);
+                    console.log('after remove');
+                    if (response != null) {
+                        logOutUser();
+                        navigation.navigate('LoginNav');
+                    } else throw new Error('eroare');
+                } catch (e) {
+                    console.log(e.message);
+                    return null;
+                }
             },
         },
     ];
