@@ -14,7 +14,7 @@ const ShoppingCartScreen = ({ navigation }) => {
             <MainHeader
                 leftIconName={'arrow-back'}
                 onIconPress={navigation.navigate}
-                navPayload={'Home'}
+                navPayload={'Home2'}
             />
             <View style={{ padding: 10 }}>
                 {shoppingCart.length == 0 ? (
@@ -36,9 +36,9 @@ const ShoppingCartScreen = ({ navigation }) => {
                     </Text>
                 ) : (
                     <Button
-                        title='Finalizare Comanda'
+                        title="Finalizare Comanda"
                         buttonStyle={styles.butonComanda}
-                        color='rgb(230,0,62)'
+                        color="rgb(230,0,62)"
                         onPress={() => {
                             if (shoppingCartCount == 0) {
                             }

@@ -29,19 +29,19 @@ export default function ProdusCard(props) {
                 <TouchableOpacity onPress={() => addToShoppingCart(item)}>
                     <View
                         style={{
-                            borderRadius: '50%',
+                            borderRadius: 15,
                             backgroundColor: 'rgb(230,0,62)',
                             width: 30,
                             height: 30,
                             alignSelf: 'flex-end',
-                            paddingLeft: '0.5',
+                            paddingLeft: 0.5,
                         }}
                     >
                         <Icon
-                            type='material'
-                            name='add'
+                            type="material"
+                            name="add"
                             size={30}
-                            color='white'
+                            color="white"
                         />
                     </View>
                 </TouchableOpacity>
@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
     },
     textNumeProdus: {
         fontWeight: 'bold',
-        fontSize: '15',
+        fontSize: 15,
     },
     textDescriere: {
-        fontSize: '11',
+        fontSize: 11,
     },
     pretAdauga: {
         //        width: '25%',

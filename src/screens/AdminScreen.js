@@ -18,7 +18,8 @@ import { UserContext } from '../context/UserContext';
 
 const AdminScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
-    const { logOutUser } = useContext(UserContext);
+    const { logOutUser, userDetails } = useContext(UserContext);
+    const atIndex = userDetails.email.indexOf('@');
     const menuItems = [
         {
             key: '1',
@@ -33,7 +34,7 @@ const AdminScreen = ({ navigation }) => {
             icon: 'person',
             title: 'Cont',
             action: () => {
-                console.log('Contul meu');
+                console.log(userDetails);
             },
         },
         {
@@ -75,7 +76,9 @@ const AdminScreen = ({ navigation }) => {
             }}
         >
             <MainHeader />
-            <Text style={styles.header}>Hello, user!</Text>
+            <Text style={styles.header}>
+                Hello, {userDetails.email.slice(0, 5)}
+            </Text>
             <View style={styles.optionsContainer}>
                 <FlatList
                     data={menuItems}
