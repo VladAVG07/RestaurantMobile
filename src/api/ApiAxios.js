@@ -4,51 +4,55 @@ import { loadData } from '../utils/AsyncStorageUtils';
 
 //TODO pune pe server toate APIURILE
 const instance = axios.create({
-  baseURL: 'https://api.diobistro.ro/v1/',
-  timeout: 10000,
-  timeoutErrorMessage: 'timeout',
+    baseURL: 'https://api.diobistro.ro/v1/',
+    timeout: 10000,
+    timeoutErrorMessage: 'timeout',
 });
 
 instance.interceptors.request.use(async (config) => {
-  //const user = await getDataByKey('user');
-  // const token = (user === null ? null : user.auth_key);
-  // config.headers.Authorization = (token ? `Bearer ${token}` : '');
-  //   const state = store.getState();
-  let url = config.url;
-  if (url !== 'utilizatori/login') {
-    const userDetails = await loadData('userDetails'); //(state.data.user === null ? null : state.data.token);
-    const token = userDetails.auth_key;
-    // console.log(userDetails);
-    config.headers.Authorization = token ? `Bearer ${token}` : '';
-  }
-  return config;
+    //const user = await getDataByKey('user');
+    // const token = (user === null ? null : user.auth_key);
+    // config.headers.Authorization = (token ? `Bearer ${token}` : '');
+    //   const state = store.getState();
+    let url = config.url;
+    if (url !== 'utilizatori/login') {
+        const userDetails = await loadData('userDetails'); //(state.data.user === null ? null : state.data.token);
+        const token = userDetails.auth_key;
+        // console.log(userDetails);
+        config.headers.Authorization = token ? `Bearer ${token}` : '';
+    }
+    return config;
 });
 
 export const login = async (loginObject) => {
-  return await instance.post(
-    'utilizatori/login',
-    queryString.stringify(loginObject)
-  );
+    return await instance.post(
+        'utilizatori/login',
+        queryString.stringify(loginObject)
+    );
 };
 
 export const getProduse = async (url) => {
-  return await instance.get(url);
+    return await instance.get(url);
 };
 
 export const getCategorii = async () => {
-  return await instance.get('categorii/category-product-count');
+    return await instance.get('categorii/category-product-count');
 };
 
 export const getMinMaxPrices = async () => {
-  return await instance.get('categorii/min-max-prices');
+    return await instance.get('categorii/min-max-prices');
 };
 
 export const sendComanda = async (comanda) => {
-  return await instance.post('comenzi', comanda);
+    return await instance.post('comenzi', comanda);
 };
 
 export const getRestaurante = async () => {
-  return await instance.get('restaurante');
+    return await instance.get('restaurante');
+};
+
+export const getComenzi = async () => {
+    return await instance.get('comenzi');
 };
 // export const getConferences = async (
 //   // page = 0,
