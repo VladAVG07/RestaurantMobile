@@ -23,7 +23,13 @@ const MersiComandaScreen = ({ comanda, navigation }) => {
                 {' '}
                 Numar comanda: 12
             </Text>
-            <Button title="Inapoi la ecranul principal" />
+            <View style={{ marginTop: 20 }}>
+                <Button
+                    title='Inapoi la ecranul principal'
+                    color='rgb(230,0,62)'
+                    onPress={() => navigation.navigate('Home2')}
+                />
+            </View>
         </SafeAreaView>
     );
 };

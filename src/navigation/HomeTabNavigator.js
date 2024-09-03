@@ -18,7 +18,7 @@ const HomeTabNavigator = () => {
     const BadgedIcon = withBadge(shoppingCartCount)(Icon);
     return (
         <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName='Home'
             screenOptions={{
                 tabBarActiveTintColor: '#e91e63',
                 headerTintColor: '#fff',
@@ -27,13 +27,13 @@ const HomeTabNavigator = () => {
             }}
         >
             <Tab.Screen
-                name="Home"
+                name='Home'
                 options={{
                     tabBarLabel: 'Acasa',
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            type="material-community"
-                            name="home"
+                            type='material-community'
+                            name='home'
                             color={color}
                             size={size}
                         />
@@ -42,34 +42,34 @@ const HomeTabNavigator = () => {
                 component={OrderNavigator}
             />
             <Tab.Screen
-                name="Oferte"
+                name='Oferte'
                 options={{
                     tabBarLabel: 'Oferte speciale',
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            type="material-community"
-                            name="offer"
+                            type='material-community'
+                            name='offer'
                             color={color}
                             size={size}
                         />
                     ),
                 }}
-                component={MersiComandaScreen}
+                component={PromotiiScreen}
             />
             <Tab.Screen
-                name="ShoppingCart"
+                name='ShoppingCart'
                 options={{
                     tabBarLabel: 'Cos',
                     tabBarIcon: ({ color, size }) =>
                         shoppingCartCount == 0 ? (
                             <Icon
-                                name="shopping-cart"
+                                name='shopping-cart'
                                 color={color}
                                 size={size}
                             />
                         ) : (
                             <BadgedIcon
-                                name="shopping-cart"
+                                name='shopping-cart'
                                 color={color}
                                 size={size}
                             />
@@ -78,13 +78,13 @@ const HomeTabNavigator = () => {
                 component={ShoppingCartScreen}
             />
             <Tab.Screen
-                name="MyAccount"
+                name='MyAccount'
                 options={{
                     tabBarLabel: 'Profilul meu',
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            type="material-community"
-                            name="account"
+                            type='material-community'
+                            name='account'
                             color={color}
                             size={size}
                         />

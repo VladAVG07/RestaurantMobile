@@ -68,6 +68,10 @@ const ShoppingCartProvider = ({ children }) => {
         return total.toFixed(2);
     };
 
+    const deleteShoppingCart = () => {
+        setShoppingCart([]);
+    };
+
     return (
         <ShoppingCartContext.Provider
             value={{
@@ -77,6 +81,7 @@ const ShoppingCartProvider = ({ children }) => {
                 editShoppingCart,
                 shoppingCartCount: createShoppingCartCount(),
                 total: createTotal(),
+                deleteShoppingCart,
             }}
         >
             {children}

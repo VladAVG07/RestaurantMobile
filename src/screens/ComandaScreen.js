@@ -15,13 +15,15 @@ import { Input, Icon, Button } from '@rneui/themed';
 import { sendComanda } from '../api/ApiAxios';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const sendComanda1 = async (comanda) => {
+const sendComanda1 = async (comanda, _callback, payload) => {
     const r = await sendComanda(comanda);
     console.log(r.data);
+    _callback(payload);
 };
 
 const ComandaScreen = ({ navigation }) => {
-    const { shoppingCart, total } = useContext(ShoppingCartContext);
+    const { shoppingCart, total, deleteShoppingCart } =
+        useContext(ShoppingCartContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [adresa, setAdresa] = useState('');
     const [mentiuni, setMentiuni] = useState('');
@@ -77,28 +79,28 @@ const ComandaScreen = ({ navigation }) => {
                     containerStyle={{ marginTop: 10 }}
                     disabledInputStyle={{ background: '#ddd' }}
                     inputContainerStyle={{}}
-                    errorMessage="Va rog adaugati o adresa pentru comanda"
+                    errorMessage='Va rog adaugati o adresa pentru comanda'
                     errorStyle={{}}
                     errorProps={{}}
                     inputStyle={{}}
-                    label="Adresa:"
+                    label='Adresa:'
                     labelStyle={{
                         color: 'black',
                         fontSize: 18,
                         marginLeft: -4,
                     }}
                     labelProps={{}}
-                    leftIcon={<Icon name="map" size={20} />}
+                    leftIcon={<Icon name='map' size={20} />}
                     leftIconContainerStyle={{}}
                     rightIcon={
                         <Icon
-                            name="close"
+                            name='close'
                             size={20}
                             onPress={() => setAdresa('')}
                         />
                     }
                     rightIconContainerStyle={{}}
-                    placeholder="strada, bloc, apartament etc."
+                    placeholder='strada, bloc, apartament etc.'
                     onChangeText={(newText) => setAdresa(newText)}
                     value={adresa}
                 />
@@ -106,28 +108,28 @@ const ComandaScreen = ({ navigation }) => {
                     containerStyle={{ marginTop: 10 }}
                     disabledInputStyle={{ background: '#ddd' }}
                     inputContainerStyle={{}}
-                    errorMessage=""
+                    errorMessage=''
                     errorStyle={{}}
                     errorProps={{}}
                     inputStyle={{}}
-                    label="Mentiuni:"
+                    label='Mentiuni:'
                     labelStyle={{
                         color: 'black',
                         fontSize: 18,
                         marginLeft: -4,
                     }}
                     labelProps={{}}
-                    leftIcon={<Icon name="add-circle-outline" size={20} />}
+                    leftIcon={<Icon name='add-circle-outline' size={20} />}
                     leftIconContainerStyle={{}}
                     rightIcon={
                         <Icon
-                            name="close"
+                            name='close'
                             size={20}
                             onPress={() => setMentiuni('')}
                         />
                     }
                     rightIconContainerStyle={{}}
-                    placeholder="mentiuni pentru restaurant/curier"
+                    placeholder='mentiuni pentru restaurant/curier'
                     onChangeText={(newText) => setMentiuni(newText)}
                     value={mentiuni}
                 />
@@ -162,19 +164,22 @@ const ComandaScreen = ({ navigation }) => {
                 </View>
 
                 <Button
-                    title="Catre Plata"
+                    title='Catre Plata'
                     buttonStyle={styles.butonComanda}
-                    color="rgb(230,0,62)"
+                    color='rgb(230,0,62)'
                     onPress={() => {
-                        const produse = shoppingCart.map((produs) => {
-                            return {
-                                id: produs.id,
-                                cantitate: produs.cantitate,
-                            };
-                        });
-                        const comanda = { mentiuni, produse, mod_plata: 1 };
-                        console.log(comanda);
-                        sendComanda1(comanda);
+                        if (adresa != '') {
+                            const produse = shoppingCart.map((produs) => {
+                                return {
+                                    id: produs.id,
+                                    cantitate: produs.cantitate,
+                                };
+                            });
+                            const comanda = { mentiuni, produse, mod_plata: 1 };
+                            console.log(comanda);
+                            sendComanda1(comanda, navigation.navigate, 'Mersi');
+                            deleteShoppingCart();
+                        }
                     }}
                 />
             </View>
