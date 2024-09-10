@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const MersiComandaScreen = ({ comanda, navigation }) => {
+const MersiComandaScreen = ({ route, navigation }) => {
+    const { comanda } = route.params;
     return (
         <SafeAreaView
             style={{
@@ -20,13 +21,12 @@ const MersiComandaScreen = ({ comanda, navigation }) => {
                 Multumim pentru comanda.
             </Text>
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: 20 }}>
-                {' '}
-                Numar comanda: 12
+                Numar comanda: {comanda.numar_comanda}
             </Text>
             <View style={{ marginTop: 20 }}>
                 <Button
-                    title='Inapoi la ecranul principal'
-                    color='rgb(230,0,62)'
+                    title="Inapoi la ecranul principal"
+                    color="rgb(230,0,62)"
                     onPress={() => navigation.navigate('Home2')}
                 />
             </View>

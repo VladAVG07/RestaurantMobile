@@ -11,11 +11,20 @@ export default function ProdusCard(props) {
         <View style={styles.container}>
             <View style={styles.picture}>
                 <Image
-                    source={require('../../assets/mancare.png')}
+                    source={
+                        item.image_file === ''
+                            ? require('../../assets/mancare.png')
+                            : {
+                                  uri:
+                                      'https://admin.diobistro.ro/uploads/produse/' +
+                                      item.image_file,
+                              }
+                    }
                     style={{
                         height: 115,
                         width: '100%',
                         aspectRatio: 1,
+                        borderRadius: '100%',
                     }}
                 />
             </View>

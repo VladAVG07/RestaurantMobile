@@ -17,8 +17,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 const sendComanda1 = async (comanda, _callback, payload) => {
     const r = await sendComanda(comanda);
-    console.log(r.data);
-    _callback(payload);
+    _callback(payload, { comanda: r.data.data });
 };
 
 const ComandaScreen = ({ navigation }) => {
@@ -27,6 +26,9 @@ const ComandaScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [adresa, setAdresa] = useState('');
     const [mentiuni, setMentiuni] = useState('');
+    const [err, setErr] = useState('');
+    const [nrTelefon, setNrTelefon] = useState('');
+    const [errTlf, setErrTlf] = useState('');
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -79,28 +81,28 @@ const ComandaScreen = ({ navigation }) => {
                     containerStyle={{ marginTop: 10 }}
                     disabledInputStyle={{ background: '#ddd' }}
                     inputContainerStyle={{}}
-                    errorMessage='Va rog adaugati o adresa pentru comanda'
+                    errorMessage={err}
                     errorStyle={{}}
                     errorProps={{}}
                     inputStyle={{}}
-                    label='Adresa:'
+                    label="Adresa:"
                     labelStyle={{
                         color: 'black',
                         fontSize: 18,
                         marginLeft: -4,
                     }}
                     labelProps={{}}
-                    leftIcon={<Icon name='map' size={20} />}
+                    leftIcon={<Icon name="map" size={20} />}
                     leftIconContainerStyle={{}}
                     rightIcon={
                         <Icon
-                            name='close'
+                            name="close"
                             size={20}
                             onPress={() => setAdresa('')}
                         />
                     }
                     rightIconContainerStyle={{}}
-                    placeholder='strada, bloc, apartament etc.'
+                    placeholder="strada, bloc, apartament etc."
                     onChangeText={(newText) => setAdresa(newText)}
                     value={adresa}
                 />
@@ -108,30 +110,59 @@ const ComandaScreen = ({ navigation }) => {
                     containerStyle={{ marginTop: 10 }}
                     disabledInputStyle={{ background: '#ddd' }}
                     inputContainerStyle={{}}
-                    errorMessage=''
+                    errorMessage=""
                     errorStyle={{}}
                     errorProps={{}}
                     inputStyle={{}}
-                    label='Mentiuni:'
+                    label="Mentiuni:"
                     labelStyle={{
                         color: 'black',
                         fontSize: 18,
                         marginLeft: -4,
                     }}
                     labelProps={{}}
-                    leftIcon={<Icon name='add-circle-outline' size={20} />}
+                    leftIcon={<Icon name="add-circle-outline" size={20} />}
                     leftIconContainerStyle={{}}
                     rightIcon={
                         <Icon
-                            name='close'
+                            name="close"
                             size={20}
                             onPress={() => setMentiuni('')}
                         />
                     }
                     rightIconContainerStyle={{}}
-                    placeholder='mentiuni pentru restaurant/curier'
+                    placeholder="mentiuni pentru restaurant/curier"
                     onChangeText={(newText) => setMentiuni(newText)}
                     value={mentiuni}
+                />
+                <Input
+                    containerStyle={{ marginTop: 10 }}
+                    disabledInputStyle={{ background: '#ddd' }}
+                    inputContainerStyle={{}}
+                    errorMessage={errTlf}
+                    errorStyle={{}}
+                    errorProps={{}}
+                    inputStyle={{}}
+                    label="Numar telefon: "
+                    labelStyle={{
+                        color: 'black',
+                        fontSize: 18,
+                        marginLeft: -4,
+                    }}
+                    labelProps={{}}
+                    leftIcon={<Icon name="phone" size={20} />}
+                    leftIconContainerStyle={{}}
+                    rightIcon={
+                        <Icon
+                            name="close"
+                            size={20}
+                            onPress={() => setNrTelefon('')}
+                        />
+                    }
+                    rightIconContainerStyle={{}}
+                    placeholder="Numar telefon"
+                    onChangeText={(newText) => setNrTelefon(newText)}
+                    value={nrTelefon}
                 />
                 <View style={styles.dropDownPret}>
                     <Text
@@ -164,11 +195,11 @@ const ComandaScreen = ({ navigation }) => {
                 </View>
 
                 <Button
-                    title='Catre Plata'
+                    title="Catre Plata"
                     buttonStyle={styles.butonComanda}
-                    color='rgb(230,0,62)'
+                    color="rgb(230,0,62)"
                     onPress={() => {
-                        if (adresa != '') {
+                        if (adresa != '' || nrTelefon != '') {
                             const produse = shoppingCart.map((produs) => {
                                 return {
                                     id: produs.id,
@@ -179,6 +210,13 @@ const ComandaScreen = ({ navigation }) => {
                             console.log(comanda);
                             sendComanda1(comanda, navigation.navigate, 'Mersi');
                             deleteShoppingCart();
+                        } else {
+                            if (adresa === '')
+                                setErr('Va rugam adaugati o adresa');
+                            if (nrTelefon === '')
+                                setErrTlf(
+                                    'Va rugam adaugati un numar de telefon'
+                                );
                         }
                     }}
                 />
@@ -193,10 +231,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         marginVertical: 20,
-    },
-    dropDownPret: {
-        //borderWidth: 1,
-        height: 200,
     },
 });
 
