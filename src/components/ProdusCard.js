@@ -24,7 +24,7 @@ export default function ProdusCard(props) {
                         height: 115,
                         width: '100%',
                         aspectRatio: 1,
-                        borderRadius: '100%',
+                        borderRadius: 70,
                     }}
                 />
             </View>

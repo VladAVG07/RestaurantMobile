@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { Icon, Input } from '@rneui/themed';
 import { ShoppingCartContext } from '../context/ShoppingCartContext';
+import HTMLView from 'react-native-htmlview';
 
 const ShoppingCartItem = ({ produs }) => {
     const { removeFromShoppingCart, editShoppingCart } =
@@ -24,13 +25,14 @@ const ShoppingCartItem = ({ produs }) => {
                     <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
                         {produs.nume}
                     </Text>
-                    <Text
+                    {/* <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={styles.produseLinie}
                     >
                         {produs.descriere}
-                    </Text>
+                    </Text> */}
+                    <HTMLView value={produs.descriere} />
                     <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
                         {produs.pret_curent + ' RON'}
                     </Text>
